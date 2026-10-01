@@ -1,0 +1,25 @@
+{
+  "name": "store-rating-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend API for the Store Rating Platform",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "check": "node --test test/*.test.js",
+    "check:health": "node -e \"const request = require('http'); const app = require('./src/app'); const server = app.listen(0, () => { const port = server.address().port; request.get('http://127.0.0.1:' + port + '/api/health', response => { let body = ''; response.on('data', chunk => body += chunk); response.on('end', () => { console.log(response.statusCode, body); server.close(); process.exit(response.statusCode === 200 ? 0 : 1); }); }); });\"",
+    "seed": "node src/seed.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
